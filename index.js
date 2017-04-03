@@ -1,5 +1,6 @@
 const url = require('url');
 const http = require('http');
+const querystring = require('querystring');
 
 var MidofficeApiError = require('./error');
 
@@ -35,46 +36,45 @@ function MidofficeApi(config) {
 	this.url = url.parse(config.url);
 }
 
-['getTravels'].forEach(function (call) {
-	MidofficeApi.prototype[call] = function (options) {
-		var api = this;
+MidofficeApi.prototype.request = function (url, options) {
+	var api = this;
+	var query = options ? querystring.stringify(options.query) : '';
 
-		return new Promise(function (resolve, reject) {
-			var req = http.request({
-				host: api.url.hostname,
-				protocol: api.url.protocol,
-				port: api.url.port,
-				method: 'GET',
-				path: '/api/v1/' + call,
-				auth: api.auth.key + ':' + api.auth.secret
-			}, function (res) {
-				var body = '';
+	return new Promise(function (resolve, reject) {
+		var req = http.request({
+			host: api.url.hostname,
+			protocol: api.url.protocol,
+			port: api.url.port,
+			method: 'GET',
+			path: url + query,
+			auth: api.auth.key + ':' + api.auth.secret
+		}, function (res) {
+			var body = '';
 
-				if (200 !== res.statusCode) {
-					return reject(res);
+			if (200 !== res.statusCode) {
+				return reject(res);
+			}
+
+			res.on('data', function (chunk) {
+				body += chunk;
+			});
+
+			res.on('end', function () {
+				try {
+					return resolve(JSON.parse(body));
+				} catch (e) {
+					return reject(e);
 				}
-
-				res.on('data', function (chunk) {
-					body += chunk;
-				});
-
-				res.on('end', function () {
-					try {
-						return resolve(JSON.parse(body));
-					} catch (e) {
-						return reject(e);
-					}
-				});
 			});
-
-			req.on('error', function (e) {
-				return reject(e);
-			});
-
-			req.end();
 		});
-	}
-});
+
+		req.on('error', function (e) {
+			return reject(e);
+		});
+
+		req.end();
+	});
+};
 
 module.exports = function (options) {
 	return new MidofficeApi(options);
