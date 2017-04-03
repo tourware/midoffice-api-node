@@ -1,0 +1,19 @@
+{
+  "name": "@typischtouristik/midoffice-api",
+  "version": "1.0.0",
+  "description": "Node.js API Wrapper to access data from app.midoffice.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TypischTouristik/midoffice-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TypischTouristik/midoffice-api/issues"
+  },
+  "homepage": "https://github.com/TypischTouristik/midoffice-api#readme"
+}
