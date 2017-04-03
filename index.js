@@ -55,6 +55,7 @@ MidofficeApi.prototype.request = function (url, options) {
 			protocol: api.url.protocol,
 			port: api.url.port,
 			method: 'GET',
+			rejectUnauthorized: false,
 			path: url + query,
 			auth: api.auth.key + ':' + api.auth.secret
 		}, function (res) {
