@@ -1,5 +1,6 @@
 const url = require('url');
 const http = require('http');
+const https = require('https');
 const querystring = require('querystring');
 
 var MidofficeApiError = require('./error');
@@ -46,9 +47,10 @@ function MidofficeApi(config) {
 MidofficeApi.prototype.request = function (url, options) {
 	var api = this;
 	var query = options ? querystring.stringify(options.query) : '';
+	var handler = api.url.protocol === 'https:' ? https : http;
 
 	return new Promise(function (resolve, reject) {
-		var req = http.request({
+		var req = handler.request({
 			host: api.url.hostname,
 			protocol: api.url.protocol,
 			port: api.url.port,
