@@ -36,6 +36,13 @@ function MidofficeApi(config) {
 	this.url = url.parse(config.url);
 }
 
+/**
+ * Requests a single endpoint.
+ *
+ * @param {String} url
+ * @param {Object} options
+ * @returns {Promise}
+ */
 MidofficeApi.prototype.request = function (url, options) {
 	var api = this;
 	var query = options ? querystring.stringify(options.query) : '';
