@@ -45,6 +45,12 @@ function MidofficeApi(config) {
  * @returns {Promise}
  */
 MidofficeApi.prototype.request = function (url, options) {
+	options = options || {};
+
+	if (options.query) {
+		options.query.filter = JSON.stringify(options.query.filter);
+	}
+
 	var api = this;
 	var query = options ? querystring.stringify(options.query) : '';
 	var handler = api.url.protocol === 'https:' ? https : http;
@@ -56,7 +62,7 @@ MidofficeApi.prototype.request = function (url, options) {
 			port: api.url.port,
 			method: 'GET',
 			rejectUnauthorized: false,
-			path: url + query,
+			path: url + '?' + query,
 			auth: api.auth.key + ':' + api.auth.secret
 		}, function (res) {
 			var body = '';
