@@ -52,18 +52,28 @@ MidofficeApi.prototype.request = function (url, options) {
 	}
 
 	var api = this;
+	var headers = {};
 	var query = options ? querystring.stringify(options.query) : '';
 	var handler = api.url.protocol === 'https:' ? https : http;
+	var method = options.method || 'GET';
+
+	if ('POST' === method) {
+		headers = {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'Content-Length': Buffer.byteLength(options.data)
+		}
+	}
 
 	return new Promise(function (resolve, reject) {
 		var req = handler.request({
 			host: api.url.hostname,
 			protocol: api.url.protocol,
 			port: api.url.port,
-			method: 'GET',
+			method: method,
 			rejectUnauthorized: false,
 			path: url + '?' + query,
-			auth: api.auth.key + ':' + api.auth.secret
+			auth: api.auth.key + ':' + api.auth.secret,
+			headers: headers
 		}, function (res) {
 			var body = '';
 
