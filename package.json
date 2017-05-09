@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/TypischTouristik/midoffice-api/issues"
   },
-  "homepage": "https://github.com/TypischTouristik/midoffice-api#readme"
+  "homepage": "https://github.com/TypischTouristik/midoffice-api#readme",
+  "dependencies": {
+    "request": "^2.81.0"
+  }
 }
