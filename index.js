@@ -1,7 +1,4 @@
-const url = require('url');
-const http = require('http');
-const https = require('https');
-const querystring = require('querystring');
+const request = require('request');
 
 var MidofficeApiError = require('./error');
 
@@ -34,7 +31,7 @@ function MidofficeApi(config) {
 	}
 
 	this.auth = config.auth;
-	this.url = url.parse(config.url);
+	this.url = config.url;
 }
 
 /**
@@ -52,53 +49,24 @@ MidofficeApi.prototype.request = function (url, options) {
 	}
 
 	var api = this;
-	var headers = {};
-	var query = options ? querystring.stringify(options.query) : '';
-	var handler = api.url.protocol === 'https:' ? https : http;
-	var method = options.method || 'GET';
-
-	if ('POST' === method) {
-		headers = {
-			'Content-Type': 'application/x-www-form-urlencoded',
-			'Content-Length': Buffer.byteLength(options.data)
-		}
-	}
 
 	return new Promise(function (resolve, reject) {
-		var req = handler.request({
-			host: api.url.hostname,
-			protocol: api.url.protocol,
-			port: api.url.port,
-			method: method,
-			rejectUnauthorized: false,
-			path: url + '?' + query,
-			auth: api.auth.key + ':' + api.auth.secret,
-			headers: headers
-		}, function (res) {
-			var body = '';
-
-			if (200 !== res.statusCode) {
-				return reject(res);
+		request({
+			method: options.method || 'GET',
+			uri: api.url + url,
+			json: options.data,
+			qs: options.query,
+			auth: {
+				user: api.auth.key,
+				pass: api.auth.secret
+			}
+		}, function (e, res, body) {
+			if (e) {
+				return reject(e);
 			}
 
-			res.on('data', function (chunk) {
-				body += chunk;
-			});
-
-			res.on('end', function () {
-				try {
-					return resolve(JSON.parse(body));
-				} catch (e) {
-					return reject(e);
-				}
-			});
+			resolve(JSON.parse(body));
 		});
-
-		req.on('error', function (e) {
-			return reject(e);
-		});
-
-		req.end();
 	});
 };
 
