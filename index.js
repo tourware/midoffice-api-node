@@ -45,7 +45,13 @@ MidofficeApi.prototype.request = function (url, options) {
 	options = options || {};
 
 	if (options.query) {
-		options.query.filter = JSON.stringify(options.query.filter);
+		try {
+			options.query.filter = JSON.stringify(options.query.filter);
+		} catch (e) {}
+		
+		try {
+			options.query.sort = JSON.stringify(options.query.sort);
+		} catch (e) {}
 	}
 
 	var api = this;
@@ -65,7 +71,11 @@ MidofficeApi.prototype.request = function (url, options) {
 				return reject(e);
 			}
 
-			resolve(JSON.parse(body));
+			if (typeof body === 'object') {
+				resolve(body);
+			} else {
+				resolve(JSON.parse(body));
+			}
 		});
 	});
 };
