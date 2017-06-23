@@ -74,7 +74,11 @@ MidofficeApi.prototype.request = function (url, options) {
 			if (typeof body === 'object') {
 				resolve(body);
 			} else {
-				resolve(JSON.parse(body));
+				try {
+					resolve(JSON.parse(body));
+				} catch (e) {
+					reject(e);
+				}
 			}
 		});
 	});
