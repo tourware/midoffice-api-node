@@ -41,7 +41,7 @@ var api = require('@typischtouristik/midoffice-api')({
 Do request to a specific endpoint:
 
 ```js
-api.request('/api/clients/' + clientId).then(function (data) {
+api.request('/api/travels/' + travelsId).then(function (data) {
   // do sth. with your data
 });
 ```
