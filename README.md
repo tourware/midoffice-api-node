@@ -31,7 +31,7 @@ Initialize with your credentials:
 ```js
 var api = require('@typischtouristik/midoffice-api')({
   url: 'https://app.midoffice.io',
-	auth: {
+  auth: {
     key: 'your-key-provided-by-midoffice-io',
     secret: 'your-secret-provided-by-midoffice-io'
   }
