@@ -21,7 +21,7 @@ The preferred way to install the Midoffice.io-API for Node.js is to use the
 into a terminal window:
 
 ```sh
-npm install midoffice-api --save
+npm install @typischtouristik/midoffice-api --save
 ```
 
 # Usage
@@ -31,7 +31,7 @@ Initialize with your credentials:
 ```js
 var api = require('@typischtouristik/midoffice-api')({
   url: 'https://app.midoffice.io',
-	auth: {
+  auth: {
     key: 'your-key-provided-by-midoffice-io',
     secret: 'your-secret-provided-by-midoffice-io'
   }
