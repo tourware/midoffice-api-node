@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  Mit dem Midoffice bieten wir Ihnen eine vollumfänglich-webbasiete Verwaltungssoftware für Ihre Reisen, Reisebausteine, Ferienhäuserr, Leistungsträger und Kundenstämme.
+Use our all-in-one solution for your business. No matter if booking calendar, travel modules or files. Typisch Touristik Midoffice allows you to manage your entire online business in one system.
 </p>
 
 <p align="center">
