@@ -45,3 +45,8 @@ api.request('/api/travels/' + travelsId).then(function (data) {
   // do sth. with your data
 });
 ```
+
+[API Reference](https://touristik.atlassian.net/wiki/spaces/TTMID/pages/33849478/2+API+Reference)
+- [Authentication](https://touristik.atlassian.net/wiki/spaces/TTMID/pages/77267096/2.1+Authentication)
+- [Models](https://touristik.atlassian.net/wiki/spaces/TTMID/pages/33849486/2.2+Models)
+- [Pagination, Sorting and Filtering](https://touristik.atlassian.net/wiki/spaces/TTMID/pages/77299852/2.3+Pagination+Sorting+and+Filtering)
