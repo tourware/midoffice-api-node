@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://www.typisch-touristik.de">
-    <img alt="Typisch Touristik" src="https://s3.eu-central-1.amazonaws.com/typischtouristik/logo_typisch-touristik_1200x443.png" width="200">
+    <img alt="Typisch Touristik" src="https://res.cloudinary.com/midoffice/image/upload/c_scale,w_200/v1502782171/storage/logo.png" width="200">
   </a>
 </p>
 
