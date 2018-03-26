@@ -62,6 +62,7 @@ MidofficeApi.prototype.request = function (url, options) {
 			uri: api.url + url,
 			json: options.data,
 			qs: options.query,
+			headers: options.headers,
 			auth: {
 				user: api.auth.key,
 				pass: api.auth.secret

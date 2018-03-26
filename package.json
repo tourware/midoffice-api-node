@@ -1,6 +1,6 @@
 {
   "name": "@typischtouristik/midoffice-api",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Node.js API Wrapper to access data from app.midoffice.io",
   "main": "index.js",
   "scripts": {
